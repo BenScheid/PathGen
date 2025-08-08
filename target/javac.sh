@@ -1,0 +1,1 @@
+/bin/sh -c cd /home/ben/myProjects/minecraft/pathgen && /usr/lib/jvm/java-17-openjdk-amd64/bin/javac @/home/ben/myProjects/minecraft/pathgen/target/org.codehaus.plexus.compiler.javac.JavacCompiler519536914911371328arguments
