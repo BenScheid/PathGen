@@ -9,9 +9,11 @@ import java.util.Set;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
+import click.scheid.pathgen.PathGenPlugin;
 import click.scheid.pathgen.commands.debug.DeleteAllCmd;
 import click.scheid.pathgen.commands.debug.SelectAllCmd;
 import click.scheid.pathgen.commands.special.HelpCmd;
@@ -31,6 +33,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class PathGenCommand implements CommandExecutor, TabExecutor {
 	
+	public static PluginCommand COMMAND;
 	private static final Map<String, SubCommand> subCommands = new HashMap<>();
 	private static final Map<String, NoNameCommand> specialCommands = new HashMap<>();
 
@@ -113,5 +116,9 @@ public class PathGenCommand implements CommandExecutor, TabExecutor {
 	public static boolean isValidName(String name) {
 		Set<String> invalidNames = subCommands.keySet();
 		return !invalidNames.stream().anyMatch(invalid -> invalid.equalsIgnoreCase(name));
+	}
+	
+	public static void setCommand(PluginCommand cmd) {
+		COMMAND = cmd;
 	}
 }

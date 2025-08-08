@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.google.gson.Gson;
@@ -44,6 +45,7 @@ public class PathGenPlugin extends JavaPlugin {
 
 	public void init() {
 		INSTANCE = this;
+		PathGenCommand.setCommand(getCommand("pathgen"));
 		PATH_REPO = new PathRepository();
 		SERIALIZER = new Gson();
 		PATH_REPO.createTable();
@@ -62,5 +64,4 @@ public class PathGenPlugin extends JavaPlugin {
 		PATH_REPO.close();
 		getLogger().info("--------------- Disable pathgen");
 	}
-
 }

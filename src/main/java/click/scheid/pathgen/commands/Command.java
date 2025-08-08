@@ -7,7 +7,7 @@ interface Command {
 	boolean execute(Player player, String[] args);
 	
 	default String getUsage() {
-		return "/pathgen [path_name] [method] [args]";
+		return PathGenCommand.COMMAND.getUsage();
 	}
 	
 }
