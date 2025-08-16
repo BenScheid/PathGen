@@ -3,8 +3,8 @@ click/scheid/pathgen/db/PathRepository.class
 click/scheid/pathgen/types/Coordinate.class
 click/scheid/pathgen/commands/subcommands/PathResumeCmd.class
 click/scheid/pathgen/types/Path.class
-click/scheid/pathgen/utils/LocationManager.class
 click/scheid/pathgen/commands/subcommands/PathPauseCmd.class
+click/scheid/pathgen/utils/LocationManager.class
 click/scheid/pathgen/commands/subcommands/PathStopCmd.class
 click/scheid/pathgen/db/DataBase.class
 click/scheid/pathgen/commands/NoNameCommand.class
@@ -26,6 +26,6 @@ click/scheid/pathgen/commands/subcommands/PathListCmd.class
 click/scheid/pathgen/commands/subcommands/PathNewCmd.class
 click/scheid/pathgen/commands/subcommands/PathAddCmd.class
 click/scheid/pathgen/commands/debug/DeleteAllCmd.class
-click/scheid/pathgen/utils/BossBarManager.class
 click/scheid/pathgen/types/Path$1.class
+click/scheid/pathgen/utils/BossBarManager.class
 click/scheid/pathgen/commands/special/HelpCmd.class

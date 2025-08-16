@@ -5,12 +5,12 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.google.gson.Gson;
 
 import click.scheid.pathgen.commands.PathGenCommand;
+import click.scheid.pathgen.config.DefaultPathGenConfig;
 import click.scheid.pathgen.db.PathRepository;
 import click.scheid.pathgen.events.PathGenEvents;
 import click.scheid.pathgen.types.Coordinate;
@@ -24,6 +24,8 @@ import click.scheid.pathgen.utils.Utils;
 public class PathGenPlugin extends JavaPlugin {
 
 	public static boolean DEBUG = true;
+	
+	public static DefaultPathGenConfig CONFIG;
 
 	public static PathGenPlugin INSTANCE;
 	public static PathRepository PATH_REPO;
@@ -46,6 +48,15 @@ public class PathGenPlugin extends JavaPlugin {
 	public void init() {
 		INSTANCE = this;
 		PathGenCommand.setCommand(getCommand("pathgen"));
+		/*
+		try {
+			
+		} catch (IOException e) {
+			getLogger().severe("Couldnt read config! Shutting down!");
+			getServer().shutdown();
+			
+		}
+		*/
 		PATH_REPO = new PathRepository();
 		SERIALIZER = new Gson();
 		PATH_REPO.createTable();

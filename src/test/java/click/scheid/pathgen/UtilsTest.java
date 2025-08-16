@@ -1,30 +1,58 @@
 package click.scheid.pathgen;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
 import click.scheid.pathgen.types.Coordinate;
 import click.scheid.pathgen.utils.Utils;
 
 public class UtilsTest {
-	
+
 	@Test
-	public void test() {
-		Coordinate c1 = new Coordinate(1.4d,2d,3.2d);
-		Coordinate c2 = new Coordinate(1.7d,2d,3.1d);
-		System.out.println(Utils.differentLocation(c1, c2));
-	}
-	
 	public void fastSqrtTest() {
-		double num = 1070342.0;
-		System.out.println(Utils.fastSqrt(num));
-		System.out.println(Math.sqrt(num));
+		double[] inputs = { -3.72, -1, 0, 1, 2, 3, 5, 7.73, 9, 17, 8.6, 25, 154.2, 148218 };
+		for (double d : inputs) {
+			calcSqrt(d);
+		}
 	}
-	
-	public void distSqTest() {
-		Coordinate from = new Coordinate(10.1, 69d, 10.1);
-		Coordinate to = new Coordinate(10.2, 69d, 10.2);
-		double dist = Utils.distanceSquared(from, to);
-		System.out.println("----------distsq: " + dist);
-		System.out.println("dist: " + Math.sqrt(dist));
+
+	public void calcSqrt(double sqrtOf) {
+		if (sqrtOf >= 0) {
+			double sqrt = Math.sqrt(sqrtOf);
+			double fastSqrt = Utils.fastSqrt(sqrtOf);
+			assertEquals(sqrt, fastSqrt, 0.01);
+		} else {
+			assertThrows(ArithmeticException.class, () -> Utils.fastSqrt(sqrtOf));
+		}
 	}
+
+	@Test
+	public void cardinalDirectionTest() {
+		// East
+		assertEquals("E", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(10.0, 0.0)));
+		// West
+		assertEquals("W", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(-10.0, 0.0)));
+		// South
+		assertEquals("S", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(0.0, 10.0)));
+		// North
+		assertEquals("N", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(0.0, -10.0)));
+
+		// Diagonals
+		assertEquals("NE", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(10.0, -10.0)));
+		assertEquals("NW", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(-10.0, -10.0)));
+		assertEquals("SE", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(10.0, 10.0)));
+		assertEquals("SW", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(-10.0, 10.0)));
+
+		// Edge case: same coordinate
+		assertEquals("N", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(0.0, 0.0)));
+
+		// Single-step axis-aligned
+		assertEquals("N", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(0.0, -1.0)));
+		assertEquals("E", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(1.0, 0.0)));
+		assertEquals("S", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(0.0, 1.0)));
+		assertEquals("W", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(-1.0, 0.0)));
+	}
+
 }

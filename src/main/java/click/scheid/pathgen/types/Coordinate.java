@@ -1,5 +1,9 @@
 package click.scheid.pathgen.types;
 
+import java.util.Objects;
+
+import javax.print.attribute.standard.MediaSize.Other;
+
 public class Coordinate implements Cloneable{
 	
 	private String worldName;
@@ -17,7 +21,7 @@ public class Coordinate implements Cloneable{
 	}
 
 	public Coordinate(Double x, Double y, Double z) {
-		this(null, x, y, z);
+		this("", x, y, z);
 	}
 	
 	public Coordinate(Double x, Double z) {
@@ -78,6 +82,23 @@ public class Coordinate implements Cloneable{
 
 	public void setZ(Double z) {
 		this.z = z;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o == this) {
+			return true;
+		}
+		return o instanceof Coordinate other 
+				&& Objects.equals(worldName, other.worldName)
+				&& Objects.equals(x, other.x)
+				&& Objects.equals(y, other.y)
+				&& Objects.equals(z, other.z);
+	}	
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(worldName, x, y, z);
 	}
 	
 	@Override

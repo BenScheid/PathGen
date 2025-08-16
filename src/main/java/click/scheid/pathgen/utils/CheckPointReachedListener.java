@@ -5,16 +5,18 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiConsumer;
 
+import click.scheid.pathgen.PathGenPlugin;
 import click.scheid.pathgen.types.Coordinate;
 
 public class CheckPointReachedListener {
 
 	private final ConcurrentMap<UUID, Coordinate> playerCheckpoints = new ConcurrentHashMap<>();
 	private final BiConsumer<UUID, Coordinate> callback;
-	private final int triggerTresholdExp2 = 10 * 10;
+	private final int triggerTresholdExp2;
 	
 	
 	public CheckPointReachedListener(BiConsumer<UUID, Coordinate> callback, ConcurrentMap<UUID, Coordinate> cps) {
+		triggerTresholdExp2 = (int) Math.pow(PathGenPlugin.CONFIG.checkPointDistance, 2);
 		this.callback = callback;
 		this.playerCheckpoints.putAll(cps);
 	}
