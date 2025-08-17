@@ -1,11 +1,12 @@
 package click.scheid.pathgen;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 import click.scheid.pathgen.types.Coordinate;
+import click.scheid.pathgen.utils.TestUtils;
 import click.scheid.pathgen.utils.Utils;
 
 public class UtilsTest {
@@ -30,29 +31,33 @@ public class UtilsTest {
 
 	@Test
 	public void cardinalDirectionTest() {
-		// East
 		assertEquals("E", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(10.0, 0.0)));
-		// West
 		assertEquals("W", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(-10.0, 0.0)));
-		// South
 		assertEquals("S", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(0.0, 10.0)));
-		// North
 		assertEquals("N", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(0.0, -10.0)));
 
-		// Diagonals
 		assertEquals("NE", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(10.0, -10.0)));
 		assertEquals("NW", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(-10.0, -10.0)));
 		assertEquals("SE", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(10.0, 10.0)));
 		assertEquals("SW", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(-10.0, 10.0)));
 
-		// Edge case: same coordinate
 		assertEquals("N", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(0.0, 0.0)));
 
-		// Single-step axis-aligned
 		assertEquals("N", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(0.0, -1.0)));
 		assertEquals("E", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(1.0, 0.0)));
 		assertEquals("S", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(0.0, 1.0)));
 		assertEquals("W", Utils.getCardinalDirection(new Coordinate(0.0, 0.0), new Coordinate(-1.0, 0.0)));
+	}
+	
+	@Test
+	public void clampTest() {
+		final int[] values = {0,1,2,3,4,5,6,7,8,9};
+		final int threshold = 5;
+		
+		for (int value : values) {
+			TestUtils.assertGreaterEqualsThan(threshold, Utils.clampLower(threshold, value));
+			TestUtils.assertSmallerEqualsThan(threshold, Utils.clampUpper(threshold, value));
+		}
 	}
 
 }

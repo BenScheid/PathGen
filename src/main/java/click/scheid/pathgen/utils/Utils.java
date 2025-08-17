@@ -210,7 +210,7 @@ public final class Utils {
 	}
 
 	public static void logAsync(Object msg) {
-		runSyncTask(() -> Bukkit.getLogger().info(msg == null ? "null" : msg.toString()));
+		runSyncTask(() -> Bukkit.getLogger().info(String.valueOf(msg)));
 	}
 
 	// Newton's method
@@ -226,5 +226,13 @@ public final class Utils {
 			guess = guess - (Math.pow(guess, 2) - in) / (2 * guess);
 		}
 		return guess;
+	}
+	
+	public static <T extends Comparable<T>> T clampLower(T lower, T value) {
+		return value.compareTo(lower) >= 0 ? value : lower;
+	}
+	
+	public static <T extends Comparable<T>> T clampUpper(T upper, T value) {
+		return value.compareTo(upper) <= 0 ? value : upper;
 	}
 }

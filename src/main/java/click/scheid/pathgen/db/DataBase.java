@@ -34,7 +34,7 @@ public class DataBase {
 	
 	public DataBase() {
 		try {
-			//init();
+			init();
 			connect();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

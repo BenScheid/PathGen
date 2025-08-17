@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import click.scheid.pathgen.types.Coordinate;
 
 public class POJOTest {
-
 	
 	@Test
 	public void coordinateEqualsTest() {

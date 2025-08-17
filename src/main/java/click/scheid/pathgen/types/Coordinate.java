@@ -103,8 +103,8 @@ public class Coordinate implements Cloneable{
 	
 	@Override
 	public String toString() {
-		return "(" + x + ", " + y + ", " + z + ")    ";
-		//return "Coordinate [worldName=" + worldName + ", x=" + x + ", y=" + y + ", z=" + z + "]";
+		//return "(" + x + ", " + y + ", " + z + ")    ";
+		return "Coordinate [worldName=" + worldName + ", x=" + x + ", y=" + y + ", z=" + z + "]";
 	}
 	
 	@Override

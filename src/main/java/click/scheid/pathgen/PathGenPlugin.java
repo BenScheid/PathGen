@@ -65,7 +65,6 @@ public class PathGenPlugin extends JavaPlugin {
 				.collect(Collectors.toConcurrentMap(Path::getPlayer, Path::getCheckpoint));
 		CHECKPOINTS = new CheckPointReachedListener(Path.getCheckPointUpdater(), checkpoints);
 		BOSS_BARS = new BossBarManager();
-		// Bukkit.getScheduler().runTaskTimer(INSTANCE, () -> DEBUG = true, 0, 40);
 		Utils.createDistanceUpdater();
 
 	}
